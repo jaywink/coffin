@@ -6,6 +6,7 @@ except ImportError:     # Python 2
 from coffin.template import Library
 from jinja2.ext import Extension
 from jinja2 import nodes
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.utils.encoding import iri_to_uri
 
 
@@ -108,7 +109,7 @@ class StaticExtension(PrefixExtension):
         lineno = stream.next().lineno
 
         path = parser.parse_expression()
-        call_node = self.call_method('get_statc_url', args=[path])
+        call_node = self.call_method('get_static_url', args=[path])
 
         if stream.next_if('name:as'):
             var = nodes.Name(stream.expect('name').value, 'store')
@@ -117,7 +118,12 @@ class StaticExtension(PrefixExtension):
             return nodes.Output([call_node]).set_lineno(lineno)
 
     @classmethod
-    def get_statc_url(cls, path):
+    def get_static_url(cls, path):
+        """Return the static url for the file based on the storage setting.
+
+        If settings.STATICFILES_STORAGE is set to Manifest
+        """
+        path = staticfiles_storage.url(path)
         return urljoin(PrefixExtension.get_uri_setting("STATIC_URL"), path)
 
 
