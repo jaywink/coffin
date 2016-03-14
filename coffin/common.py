@@ -1,7 +1,6 @@
 import os
 import warnings
 
-from django import dispatch
 from jinja2 import Environment, loaders
 from jinja2 import defaults as jinja2_defaults
 from coffin.template import Library as CoffinLibrary
@@ -80,7 +79,7 @@ class CoffinEnvironment(Environment):
         register all libraries globally.
         """
         from django.conf import settings
-        from django.template import (
+        from django.template.base import (
             get_library, import_library, InvalidTemplateLibrary)
 
         libs = []
@@ -113,7 +112,7 @@ class CoffinEnvironment(Environment):
 
     def _get_all_extensions(self):
         from django.conf import settings
-        from django.template import builtins as django_builtins
+        from django.template.base import builtins as django_builtins
         from coffin.template import builtins as coffin_builtins
         from django.core.urlresolvers import get_callable
 

@@ -6,10 +6,6 @@ from coffin.template.loader import render_to_string
 __all__ = ('page_not_found', 'server_error', 'shortcut')
 
 
-# no Jinja version for this needed
-from django.views.defaults import shortcut
-
-
 def page_not_found(request, template_name='404.html'):
     """
     Default 404 handler.

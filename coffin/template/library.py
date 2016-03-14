@@ -1,4 +1,5 @@
-﻿from django.template import Library as DjangoLibrary, InvalidTemplateLibrary
+﻿from django.template import Library as DjangoLibrary
+from django.template.base import InvalidTemplateLibrary
 from jinja2.ext import Extension as Jinja2Extension
 import types
 from coffin.interop import (

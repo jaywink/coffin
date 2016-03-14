@@ -1,14 +1,11 @@
-from django.template import (
-    Context as DjangoContext,
-    add_to_builtins as django_add_to_builtins,
-    import_library,
-)
+from django.template import Context as DjangoContext
+from django.template.base import add_to_builtins as django_add_to_builtins, import_library
 from jinja2 import Template as _Jinja2Template
 
 # Merge with ``django.template``.
 from django.template import __all__
 from django.template import *
-from django.template import Origin
+from django.template.base import Origin
 from django.test import signals
 
 # Override default library class with ours
